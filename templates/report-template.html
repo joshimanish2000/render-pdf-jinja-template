@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="charset" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Jarvis reporting: web homepage</title>
+  </head>
+  <body class="p-4">
+    <script>
+      const today = new Date();
+      const todayDate = `${today.getDate()} ${today.getMonth()} ${today.getFullYear()}`;
+    </script>
+
+    <div class="flex justify-center">
+      <h1>{{date}}</h1>
+    </div>
+
+    <h2>Overall</h2>
+    <table class="border border-collapse my-1">
+      <tbody class="odd:bg-slate-200 even:bg-white">
+        {% for name, value in overall.metrics.items() %}
+        <tr>
+          <th class="border border-black">{{name}}</th>
+          <td class="border border-black">{{value}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="flex gap-x-5">
+      {% for item in data %}
+      <div class="border border-black p-2">
+        <div class="w-[200px] h-[300px]">
+          <img src="{{item.imgSrc}}" />
+        </div>
+        <table class="border border-collapse my-1">
+          <tbody class="odd:bg-slate-200 even:bg-white">
+            {% for name, value in item.metrics.items() %}
+            <tr>
+              <th class="border border-black">{{name}}</th>
+              <td class="border border-black">{{value}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
